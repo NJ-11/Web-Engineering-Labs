@@ -1,0 +1,92 @@
+@charset "utf-8";
+.top-header{
+background:#1A202C;
+padding-top:5em;
+}
+html, body{
+  	
+    font-size: 100%;
+  	 background: #C2C2C2;
+}
+.line
+{
+	background:#C00;
+}
+/* The animation code */
+@keyframes example {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}
+@keyframes examples {
+    from {background-color: yellow;}
+    to {background-color: red;}
+}
+@-webkit-keyframes example3 {
+    50%   { left:400px; top:260px;}
+      70%  {left:400px; top:400px;}
+    100% { left:400px; top:260px;}
+}
+@-webkit-keyframes example4 {
+    50%   { left:400px; top:260px;}
+      70%  {left:400px; top:130px;}
+    100% { left:400px; top:260px;}
+}
+.nav-about{
+	
+	height:600px;
+	width 100%;
+	background-color: #1A202C;
+	color:white;
+	font-size:36px;
+	text-align:center;
+	}
+
+
+/* The element to apply the animation to */
+.one {
+	opacity:0;
+    width: 4%;
+	float:left;
+    height: 400px;
+    background-color: red;
+    animation-name: example;
+    animation-duration: 0.5s;
+	animation-iteration-count:infinite;
+	
+}/* CSS Document */
+
+.two {
+	opacity:0;
+    width: 4%;
+	float:left;
+    height: 400px;
+    background-color: yellow;
+    animation-name: examples;
+    animation-duration: 0.5s;
+	animation-iteration-count:infinite;
+}/* CSS Document */
+
+.nav-about:hover #start div{
+	opacity : 100;
+	
+	}
+
+#plane {
+	position:fixed;
+	top:260px;
+	left:400px;
+	}
+	#plane:hover{
+		 animation-name: example3;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-direction: reverse; 
+		
+		}
+			#plane:active{
+		 animation-name: example4;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-direction: reverse; 
+		
+		}
