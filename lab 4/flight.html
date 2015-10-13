@@ -4,14 +4,19 @@
 <meta charset="utf-8">
 <title>Plane Simulator</title>
 <link href='styling.css' rel='stylesheet' type='text/css'>
-<script   >
+<script>
 
-
+var chances = 10000;
 document.onkeydown = moveSelection;
 setInterval(doSomething,15);
 
 
 function Collide() {
+	var tel = document.getElementById('number');
+			   tel.innerHTML="chances: "+chances;
+			   if(chances<=0){
+				   
+				   alert("Game over");}
 	
 	var front = parseInt(document.getElementById('ob').style.right)+parseInt(document.getElementById('ob').style.width);
 	var planefront = parseInt(document.getElementById('plane').style.right);
@@ -20,12 +25,25 @@ function Collide() {
 	var down = parseInt(document.getElementById('ob').style.top);
 	var downplane = parseInt(document.getElementById('plane').style.top)+parseInt(document.getElementById('plane').style.height);
 
+
+	var front11 = parseInt(document.getElementById('ob1').style.right)+parseInt(document.getElementById('ob1').style.width);
+	
+	var top11 = parseInt(document.getElementById('ob1').style.top)+parseInt(document.getElementById('ob1').style.height);
+	
+	var down11 = parseInt(document.getElementById('ob1').style.top);
+	
+
+console.log((front11 > planefront && downplane>top11 && down11> planetop));
 	
     return (
-       ((front > planefront && downplane>top &&(down+120> planetop))|| (front > planefront &&(planetop +120)<top)
+       ((front > planefront && downplane>top &&(down> planetop))||(downplane>down && front > planefront  && downplane<top )
+	   ||(planetop>down && front > planefront  &&  planetop<top)||(front11 > planefront && downplane>top11 &&(down11> planetop))
+	   ||(downplane>down11 && front11 > planefront  && downplane<top11 )
+	   ||(planetop>down11 && front11 > planefront  &&  planetop<top11)
+	  
 )
 	   
-	   
+	   /*|| (front > planefront &&(planetop +120)<top)*/
     );
 }
 function doSomething(){
@@ -49,7 +67,8 @@ function doSomething(){
 		  
 		
 		  if(Collide()){
-			  alert("Collision Detected");
+			  
+			   chances = chances -1;
 			  
 			  }
 }
@@ -80,19 +99,19 @@ function doSomething(){
 
 
 </head>
-<body onload="docReady()">
+<body>
 
 <div class="line">
-<br>
+<p id="number"></p>
 
 </div>
 
 <div class="nav-about">
 
 
-<img id="plane" src="airplane.png" style="position:absolute;top:0;left:0;right:1400px;width:270px;height:270px;" />
-<img id="ob" src="ob.png" style="position:absolute;right:0;top:0;padding-top:100px;width:100px;height:100px";/>
-<img id="ob1" src="ob1.png" style="position:absolute;right:-550px;top:0;padding-top:200px;width:100px;height:100px";/>
+<img id="plane" width="150px" height="150px" src="airplane.png" style="position:absolute;top:0;left:0;right:1400px;width:270px;height:270px;" />
+<img id="ob" src="ob.png" style="position:absolute;right:0px;top:0px;padding-top:100px;width:100px;height:100px";/>
+<img id="ob1" src="ob1.png" style="position:absolute;right:-550px;top:400px;padding-top:0px;width:100px;height:100px";/>
 <div id="start">
 <div class="one">  
 
@@ -157,7 +176,12 @@ function doSomething(){
 <div class="one">  
 
 </div>
+<div class="two">  
 
+</div>
+<div class="one">  
+
+</div>
 </div>
 </div>
 
