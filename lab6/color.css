@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+div{
+	
+	overflow:scroll;
+	height:100px;
+	width:600px;
+	border:thick;
+	border-style:double;
+	border-color:#000;
+	margin:20px 20px 20px 20px;
+	
+	
+	}
+
