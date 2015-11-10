@@ -1,0 +1,447 @@
+/*Nayab Javed 05122*/
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dynamic Form</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+<style>
+
+input{display:block}
+p{
+	
+	border-color:#00F;
+	border-style:solid;
+	border-width:2px;
+	
+	
+}
+</style>
+<script>
+minlength=10;
+function CheckPassword(inputtxt)   
+{   
+var rt=true;
+var passw=  /^(?=.*[a-z]).+$/;  
+if(passw.test(inputtxt))   
+{    
+}  
+else{ alert("password should contain at least one lowercase character.");
+return;
+}
+ passw=  /^(?=.*[A-Z]).+$/;  
+if(passw.test(inputtxt))   
+{    
+}  
+else {alert("password should contain at least one Uppercase character.");
+return;
+}
+ passw=  /^(?=.*[0-9_\W]).+$/;  
+if(passw.test(inputtxt))   
+{    
+}  
+else {alert("password should contain at least one digit");
+return;}
+}
+function validate(){
+	
+	var formElements = document.getElementById("form1").elements;
+	for(var i=0; i<formElements.length;i++){
+		
+		if(formElements[i].required==true )
+		{		
+		if(formElements[i].value == ""){	
+			alert(formElements[i].name+" is empty");
+			return false;
+		}
+		}
+		if(formElements[i].type == "password" )
+		{ 	CheckPassword(formElements[i].value);	}
+
+	}
+		
+
+	
+}
+
+var json;
+var fvar = 0;
+function ShowOptions()
+{
+	if(fvar==1)
+	{
+		$("#form1").remove();
+		
+		fvar=0;
+		}
+	
+	
+	if(fvar==0){
+	
+	$("button").each(function()
+	{$(this).show();}
+	 );
+	 
+	var f = document.createElement("form");
+	f.setAttribute('id',"form1");
+	f.setAttribute('method',"post");
+	f.setAttribute('action',"submit.php");
+	 f.onsubmit = "submitted()";
+    var submit = document.createElement("input");
+    submit.type="button";
+    submit.name="submit";
+    submit.value = "Submit me";
+    submit.id = "submit";
+    submit.onclick="submitted()";
+    f.appendChild(submit);
+	$("body").append(f);
+		var bt = document.getElementById("a11")
+		
+	fvar=1;
+	 json = '{"form":[';
+    document.getElementById("submit").addEventListener("click", function () {
+      
+		submitted();
+		
+    });
+	}
+	
+	}
+	
+	
+	
+	
+function NewPassInput()
+{
+var i = document.createElement("input");
+var Username = prompt("Enter name of text field.", "");
+i.type = "password";
+i.name = Username;	
+
+
+
+i.required=true;
+ 
+
+var req = prompt("To set maximum length enter 1");
+if(req=='1'){
+
+var req1 = prompt("enter max length");
+
+i.setAttribute('maxlength',req1);
+json+='{"element":"input", "type":"password","name":"'+Username+'"},';
+}
+
+
+
+var t = document.createElement("p");
+t.innerHTML = Username;
+t.setAttribute('contenteditable',"true");
+   
+var form = document.getElementById("form1");
+form.appendChild(t);
+form.appendChild(i);
+
+}
+function NewTextInput()
+{
+var i = document.createElement("input");
+var Username = prompt("Enter name of text field.", "");
+i.type = "text";
+i.name = Username;	
+
+var req = prompt("To set required enter 1");
+if(req=='1'){
+
+i.required=true;
+}
+else
+i.required=false; 
+
+var req = prompt("To set maximum length enter 1");
+if(req=='1'){
+
+var req1 = prompt("enter max length");
+
+i.setAttribute('maxlength',req1);
+}
+ 
+
+
+var t = document.createElement("p");
+t.innerHTML = Username;
+t.setAttribute('contenteditable',"true");
+    
+var form = document.getElementById("form1");
+form.appendChild(t);
+form.appendChild(i);
+
+
+json+='{"element":"input", "type":"text","name":"'+Username+'"},';
+
+}
+
+function addArea()
+{
+	var form = document.getElementById("form1");
+var i = document.createElement("textarea");
+var Username = prompt("Enter name of text area", "");
+i.form=form;
+i.name = Username;	
+var req = prompt("To set required enter 1");
+if(req=='1'){
+
+i.required=true;
+}
+else
+i.required=false; 
+
+var req = prompt("To set rows and cols enter 1");
+if(req=='1'){
+var req2 = prompt("enter max rows");
+i.setAttribute('rows',req2);
+
+var req1 = prompt("enter max columns");
+i.setAttribute('cols',req1);
+
+json+='{"element":"textarea", "type":"","name":"'+Username+'"},';
+}
+ 
+
+
+var t = document.createElement("p");
+t.innerHTML = Username;
+t.setAttribute('contenteditable',"true");
+   
+
+form.appendChild(t);
+var mybr = document.createElement('br');
+form.appendChild(mybr);
+form.appendChild(i);
+var mybr1 = document.createElement('br');
+form.appendChild(mybr1);
+
+}
+
+
+function addCheck(){
+var form = document.getElementById("form1");	
+var Username = prompt("Enter text for check boxes", "");
+var t = document.createTextNode(Username);
+form.appendChild(t);
+var mybr = document.createElement('br');
+form.appendChild(mybr);
+
+
+var ttty = "";
+var sss=prompt("Check box option text", "");
+while(sss!='0@'){
+
+
+var tr = document.createTextNode(sss);
+form.appendChild(tr);
+
+var c = document.createElement("input");
+c.type = "checkbox";
+form.appendChild(c);
+ttty+=sss;
+ttty+=",";
+sss=prompt("Check box option text", "");
+
+}
+
+Username += ttty;
+json+='{"element":"input", "type":"checkbox","name":"'+Username+'"},';
+
+	}
+	
+	
+function addRadio(){
+var form = document.getElementById("form1");	
+var Username = prompt("Enter text for check boxes", "");
+var t = document.createTextNode(Username);
+form.appendChild(t);
+var mybr = document.createElement('br');
+form.appendChild(mybr);
+
+var sss=prompt("Check box option text", "");
+while(sss!='0@'){
+
+
+var tr = document.createTextNode(sss);
+form.appendChild(tr);
+
+var c = document.createElement("input");
+c.name = Username;
+c.type = "radio";
+form.appendChild(c);
+sss=prompt("Check box option text", "");
+
+}
+
+json+='{"element":"input", "type":"radio","name":"'+Username+'"},';
+}
+	
+	
+	
+	
+function addSelect()
+{
+var form = document.getElementById("form1");
+
+var i = document.createElement("select");
+var Username = prompt("Enter name of datalist", "");
+
+
+var sss=prompt("Enter select option", "");
+while(sss!='0@'){
+
+var c = document.createElement("option");
+c.innerHTML=sss;
+i.appendChild(c);
+sss=prompt("Enter select option text", "");
+}
+
+form.appendChild(i);
+
+var mybr = document.createElement('br');
+form.appendChild(mybr);
+json+='{"element":"select", "type":"","name":"'+Username+'"},';
+}
+	
+
+
+function addDatalist()
+{
+var form = document.getElementById("form1");
+
+var i = document.createElement("datalist");
+var j = document.createElement("input");
+
+var Username = prompt("Enter name of datalist", "");
+j.setAttribute('list',Username);
+i.id = Username;
+
+var sss=prompt("Enter select option", "");
+while(sss!='0@'){
+
+var c = document.createElement("option");
+c.innerHTML=sss;
+i.appendChild(c);
+sss=prompt("Enter select option text", "");
+}
+j.appendChild(i);
+form.appendChild(j);
+
+var mybr = document.createElement('br');
+form.appendChild(mybr);
+
+
+}
+	
+	function addKeyGen(){
+		var iii = 0;
+		
+		if(iii==0){
+			var form = document.getElementById("form1");
+	var tr = document.createTextNode("Encryption: ");
+		form.appendChild(tr);
+
+			var c = document.createElement("keygen");
+			form.appendChild(c);
+			var mybr = document.createElement('br');
+form.appendChild(mybr);
+			
+			}
+		iii =1;
+	json+='{"element":"keygen", "type":"radio","name":""},';	 
+		
+		}
+	
+
+function addNumber()
+{var form = document.getElementById("form1");
+
+var user = prompt("Enter text description", "");
+
+var tr = document.createTextNode(user);
+form.appendChild(tr);
+
+
+var i = document.createElement("input");
+i.type="number";
+var minu = prompt("Min number", "");
+i.setAttribute('min',minu);
+var maxu = prompt("Max number", "");
+i.setAttribute('max',maxu);
+
+form.appendChild(i);
+
+	json+='{"element":"input", "Min":"'+minu+'","max":"'+maxu+'"},';
+	}
+
+
+function addFile(){
+{var form = document.getElementById("form1");
+
+var user = prompt("Enter text description", "");
+	var tr = document.createTextNode(user);
+	form.appendChild(tr);
+
+
+var i = document.createElement("input");
+i.type="file";
+i.name = user;
+
+var req = prompt("To set required enter 1");
+if(req=='1'){
+
+i.required=true;
+}
+else
+i.required=false;
+
+
+form.appendChild(i);	
+	
+		json+='{"element":"input", "type":"file","name":"'+user+'"},';
+	}
+}
+
+
+
+
+
+function submitted(){
+	
+    json = json.substring(0, json.length - 1);
+    json+="]}";
+	
+    localStorage.setItem("json", json);
+    console.log(localStorage.getItem("json"));
+	validate();
+}
+
+
+
+</script>
+</head>
+
+<body>
+
+<button id = "11"type="button" onclick="ShowOptions()" >Create Form</button>
+<button class="aa" type="button" onclick="NewTextInput()" style="display:none">New Text Input</button>
+<button class="aa" type="button" onclick="NewPassInput()" style="display:none">New Password</button>
+<button class="aa" type="button" onclick="addCheck()" style="display:none">New Checkbox Options</button>
+<button class="aa" type="button" onclick="addRadio()" style="display:none">New Radio Option</button>
+<button class="aa" type="button" onclick="addArea()" style="display:none">New Text Area</button>
+<button class="aa" type="button" onclick="addSelect()" style="display:none">New Selection List</button>
+<button class="aa" type="button" onclick="addDatalist()" style="display:none">New Data List</button>
+<button class="aa" type="button" onclick="addKeyGen()" style="display:none">Add key gen</button>
+<button class="aa" type="button" onclick="addNumber()" style="display:none">Add Number input</button>
+<button class="aa" type="button" onclick="addFile()" style="display:none">Add File</button>
+<button class="aa" type="button" onclick="addOut()" style="display:none">Add Output</button>
+<button class="aa" type="button" onclick="makefile()" style="display:none">Make File</button>
+</body>
+</html
